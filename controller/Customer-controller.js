@@ -8,7 +8,6 @@ export const addCustomer = async (request, response) => {
         })
 
         await newCustomer.save();
-
         return response.status(200).json(newCustomer);
     } catch (error) {
         return response.status(500).json(error.message);
