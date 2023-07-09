@@ -2,6 +2,15 @@ import mongoose from "mongoose";
 
 
 const CustomerSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        default: async function () {
+          const maxIdDocument = await Customer.findOne().sort({ id: -1 }).select('id');
+          const maxId = maxIdDocument ? maxIdDocument.id : 0;
+          return maxId + 1;
+        },
+        unique: true,
+      },
     email: {
         type: String,
         required: true,
